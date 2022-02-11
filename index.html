@@ -1,17 +1,77 @@
-<span class="content_item non_wrapping">
-    <span class="page_heading">
-        <span>Drill down, and dig deep, with a table</span>
-    </span>
-</span>
-<div id="DirectEditPreserve" class="wow fadeInUp databaseTable_holder 122860">
-  <div id="DirectEditPreserve" class="databaseTable_heading">
-    <div id="DirectEditPreserve" class="databaseTable_title">Test Table</div>
-    <input id="DirectEditPreserve" class="databaseTable_search" type="text" width="200" placeholder="Search this table">
-  </div>
-  <div id="DirectEditPreserve" class="databaseTable">
-    <div id="DirectEditPreserve" class="databaseTable_import_wrap" style="display: block;">
-	</div>
-    <div id="DirectEditPreserve" class="databaseTable_UI_scrollLeft databaseTable_UI_button" style="display: none;"><!-- JS shows/hides by appending the .hidden class --></div>
-    <div id="DirectEditPreserve" class="databaseTable_UI_scrollRight databaseTable_UI_button" style="display: none;"><!-- JS shows/hides by appending the .hidden class --></div>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>WMUC Record Library</title>
+    <meta name="author" content="Seth Treiman">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <main class="row">
+            <div class="col">
+                <h1>WMUC Record Library</h1>
+
+                <p>Use the search bar or look through the table for records and their locations. <a
+                        href="https://github.com/sethtrei/Library">Code
+                        on GitHub</a>.</p>
+
+                <p> Here's WMUC's Discogs page for more records <a
+                        href="https://www.discogs.com/user/WMUC_RADIO/collection">WMUC_RADIO on Discogs</a>.
+                </p>
+
+                <div id="table-container"></div>
+            </div>
+        </main>
+        <footer class="row">
+            <div class="col">
+                <hr>
+                <p class="text-right">In Use: <a href="https://github.com/derekeder/csv-to-html-table">CSV to HTML
+                        Table</a> by
+                    <a href="http://derekeder.com">Derek
+                        Eder</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.csv.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="js/csv_to_html_table.js"></script>
+
+    <script>
+        function format_link(link) {
+            if (link)
+                return "<a href='" + link + "' target='_blank'>" + link + "</a>";
+            else return "";
+        }
+
+        CsvToHtmlTable.init({
+            csv_path: "data.csv",
+            element: "table-container",
+            allow_download: true,
+            csv_options: {
+                separator: ",",
+                delimiter: '"'
+            },
+            datatables_options: {
+                paging: false
+            },
+            custom_formatting: [
+                [4, format_link]
+            ]
+        });
+    </script>
+</body>
+
+</html>
